@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        // "types": ["node", "web"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        // "esModuleInterop": true,
+
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": false, // false to disallow importing .ts files, and required to be false with noEmit : false
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "noEmit": false, // false to allow emission of output
+        "jsx": "react-jsx",
+
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+
+        "baseUrl": ".",
+        "composite": true // enable composite builds
+    },
+    "include": ["src/**/*", "**/*.ts", "**/*.tsx", "vite.config.mts"],
+    "exclude": ["node_modules", "dist"]
+}

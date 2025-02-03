@@ -1,11 +1,6 @@
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 import react from '@vitejs/plugin-react';
-import tailwindcss from 'tailwindcss';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
@@ -17,11 +12,6 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
         },
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-    },
-    css: {
-        postcss: {
-            plugins: [tailwindcss()],
-        },
     },
     server: {
         port: 5173, // Vite's default : 5173 but you can replace this port with any port. Note if the port is already being used, Vite will automatically try the next available port, is strictPort: true is not defined, so this may not be the actual port the server ends up listening on.
