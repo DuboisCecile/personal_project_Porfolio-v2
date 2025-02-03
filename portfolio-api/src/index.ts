@@ -1,10 +1,10 @@
 import cors from 'cors';
 import express from 'express';
-
 import Mailjet from 'node-mailjet';
-import env from './src/env.js';
-import { ExceptionsHandler } from './src/middlewares/exceptions.handler.js';
-import { UnknownRoutesHandler } from './src/middlewares/unknownRoutes.handler.js';
+
+import env from './env.js';
+import { ExceptionsHandler } from './middlewares/exceptions.handler.js';
+import { UnknownRoutesHandler } from './middlewares/unknownRoutes.handler.js';
 
 const {
     PORT,
@@ -93,10 +93,12 @@ app.post('/contactMail', (req, res) => {
 
     request
         .then((result) => {
+            // eslint-disable-next-line no-console
             console.log(result);
             res.sendStatus(200);
         })
         .catch((err) => {
+            // eslint-disable-next-line no-console
             console.log(err);
             res.sendStatus(500);
         });
@@ -125,11 +127,12 @@ app.use(
         res: express.Response,
         next: express.NextFunction
     ) => {
-        ExceptionsHandler(err, req, res, next);
+        void ExceptionsHandler(err, req, res, next);
     }
 );
 
 /* ********************** server setup ********************** */
 app.listen(PORT, () => {
+    // eslint-disable-next-line no-console
     console.log(`Server running on port ${PORT}`);
 });

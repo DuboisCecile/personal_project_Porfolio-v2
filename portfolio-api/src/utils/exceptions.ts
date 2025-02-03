@@ -1,5 +1,5 @@
 interface ApiException {
-    error: any;
+    error: unknown;
     status: number;
 }
 
@@ -14,7 +14,10 @@ interface ApiException {
  * Ici `this.error = error` et `this.status = status`
  */
 class Exception implements ApiException {
-    constructor(readonly error: any, readonly status: number) {}
+    constructor(
+        readonly error: Error,
+        readonly status: number
+    ) {}
 }
 
 /**
@@ -24,7 +27,7 @@ export class NotFoundException extends Exception {
     /**
      * On appelle le `constructor` de la classe parente `Exception`
      */
-    constructor(error: any) {
+    constructor(error: Error) {
         super(error, 404);
     }
 }
@@ -36,7 +39,7 @@ export class BadRequestException extends Exception {
     /**
      * On appelle le `constructor` de la classe parente `Exception`
      */
-    constructor(error: any) {
+    constructor(error: Error) {
         super(error, 400);
     }
 }

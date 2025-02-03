@@ -1,42 +1,36 @@
-import js from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
-// import importAliasPlugin from 'eslint-plugin-import-alias';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default [
     {
-        ignores: [
-            'dist',
-            'tailwind.config.js',
-            'vite.config.ts',
-            'eslint.config.js',
-            'postcss.config.js',
-        ],
+        // Ignore the output distribution folder
+        ignores: ['dist'],
     },
     {
-        extends: [js.configs.recommended, ...tseslint.configs.recommended],
-        files: ['**/*.{ts,tsx}', '**/*.{js,jsx}'],
+        // Apply the following rules to all TypeScript and JavaScript files
+        files: ['**/*.{ts,js}'],
         languageOptions: {
+            // Set the ECMAScript version to 2020
             ecmaVersion: 2020,
-            globals: globals.browser,
+            // Set the global variables for both the browser and Node.js environments
+            globals: {
+                ...globals.browser,
+                ...globals.node,
+            },
+            // Use the TypeScript parser
+            parser: tsParser,
             parserOptions: {
-                ecmaFeatures: {
-                    jsx: true,
-                },
-                projectService: './tsconfig.json',
+                project: './tsconfig.json',
                 tsconfigRootDir: './',
             },
         },
         plugins: {
-            'react-hooks': reactHooks,
-            'react-refresh': reactRefresh,
             import: importPlugin,
             // 'import-alias': importAliasPlugin,
-            react: react,
+            // Use the TypeScript ESLint plugin
+            '@typescript-eslint': tseslint,
         },
         rules: {
             // No need to add these lines because we are already getting all the recommended ESLint rules as part of the TypeScript plugin tseslint
@@ -44,25 +38,15 @@ export default tseslint.config(
             // ...js.configs.recommended.rules,
             // ...tseslint.configs.recommended.rules,
 
-            // Extend rules from React Hooks plugin, promoting best practices when using hooks
-            ...reactHooks.configs.recommended.rules,
-
             // Custom rules
 
             // Warn if console.log is used, but allow console.error and console.warn
             'no-console': ['warn', { allow: ['error', 'warn'] }],
 
-            // This rule is useful for React applications using React Refresh. It helps ensure that only components are exported, which improves the performance of React Refresh.
-            'react-refresh/only-export-components': [
-                'warn',
-                { allowConstantExport: true },
-            ],
-
             // Disable the standard ESLint rule for unused variables
             'no-unused-vars': 'off',
             // Warn if there are unused variables
             '@typescript-eslint/no-unused-vars': [
-                // 'warn', // Mark unused variables as warnings
                 'error', // Mark unused variables as errors
                 {
                     args: 'none', // Ignore unused function arguments
@@ -88,6 +72,9 @@ export default tseslint.config(
             // Warn if a non-null assertion is used (against non-null assertions (e.g. `!`))
             '@typescript-eslint/no-non-null-assertion': 'warn',
 
+            // Warn if a require statement is used instead of an import statement (when using `require`, prefers `import` syntax)
+            '@typescript-eslint/no-var-requires': 'warn',
+
             // Error if a promise is created without being awaited
             '@typescript-eslint/no-floating-promises': 'error',
 
@@ -110,32 +97,6 @@ export default tseslint.config(
             // Automatically replaces string concatenation with template literals
             'prefer-template': 'error',
 
-            // Disallow nested ternary expressions
-            'no-nested-ternary': 'error',
-
-            // // Enforces the use of the @ alias for imports from the src directory, instead of using relative paths.
-            // 'import-alias/import-alias': [
-            //     'error',
-            //     {
-            //         relativeDepth: 0,
-            //         aliases: [{ alias: '@', matcher: '^src' }], // Defines alias for src
-            //     },
-            // ],
-
-            // // Prevents the use of relative imports with ../ and instead encourages the use of the @ alias.
-            // 'no-restricted-imports': [
-            //     'error',
-            //     {
-            //         patterns: [
-            //             {
-            //                 group: ['../*'],
-            //                 message:
-            //                     'Use the @ alias instead of relative imports with ../',
-            //             },
-            //         ],
-            //     },
-            // ],
-
             // Enforces a specific order for organizing your imports. It groups them into categories (e.g., builtin, external, internal, parent, sibling, index) and ensures that they are sorted alphabetically within each group.
             'import/order': [
                 'error',
@@ -153,14 +114,14 @@ export default tseslint.config(
                         order: 'asc',
                         caseInsensitive: true,
                     },
-                    // pathGroups: [
-                    //     {
-                    //         pattern: '@/**',
-                    //         group: 'internal',
-                    //         position: 'after',
-                    //     },
-                    // ],
-                    // pathGroupsExcludedImportTypes: ['builtin'],
+                    pathGroups: [
+                        {
+                            pattern: '@/**',
+                            group: 'internal',
+                            position: 'after',
+                        },
+                    ],
+                    pathGroupsExcludedImportTypes: ['builtin'],
                 },
             ],
 
@@ -169,26 +130,6 @@ export default tseslint.config(
 
             // Arrow function simplification
             'arrow-body-style': ['error', 'as-needed'],
-
-            // Remove unnecessary React fragments
-            'react/jsx-no-useless-fragment': [
-                'error',
-                {
-                    allowExpressions: true,
-                },
-            ],
-
-            // Automatically close self-closing components
-            'react/self-closing-comp': [
-                'warn',
-                {
-                    component: true,
-                    html: true,
-                },
-            ],
-
-            // Remove unnecessary React fragments
-            'react/jsx-no-useless-fragment': 'error',
         },
         // TypeScript and Node.js import resolution settings
         settings: {
@@ -201,9 +142,9 @@ export default tseslint.config(
                     project: './tsconfig.json',
                 },
                 node: {
-                    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                    extensions: ['.js', '.ts'],
                 },
             },
         },
-    }
-);
+    },
+];
