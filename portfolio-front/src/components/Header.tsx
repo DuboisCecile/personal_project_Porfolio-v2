@@ -1,8 +1,7 @@
-/* eslint-disable no-void */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Header() {
+export default function Header(): React.ReactElement {
     const [openedBurgerMenu, setOpenedBurgerMenu] = useState(false);
     const [btnBurger, setBtnBurger] = useState<HTMLElement | null>(null);
 
@@ -10,16 +9,16 @@ export default function Header() {
         setBtnBurger(document.querySelector('#btn-burger') as HTMLElement);
     }, []);
 
-    const handleBurgerToggle = () => {
+    const handleBurgerToggle = (): void => {
         setOpenedBurgerMenu(!openedBurgerMenu);
         if (btnBurger?.classList) {
             if (btnBurger.classList.contains('open')) {
                 btnBurger.classList.remove('open');
-                btnBurger.offsetWidth; // https://stackoverflow.com/questions/60686489/what-purpose-does-void-btnBurger-offsetwidth-serve
+                void btnBurger.offsetWidth; // https://stackoverflow.com/questions/60686489/what-purpose-does-void-btnBurger-offsetwidth-serve
                 btnBurger.classList.add('close');
             } else if (btnBurger.classList.contains('close')) {
                 btnBurger.classList.remove('close');
-                btnBurger.offsetWidth;
+                void btnBurger.offsetWidth;
                 btnBurger.classList.add('open');
             } else {
                 btnBurger.classList.add('open');
@@ -27,11 +26,11 @@ export default function Header() {
         }
     };
 
-    const closeBurger = () => {
+    const closeBurger = (): void => {
         handleBurgerToggle();
     };
 
-    const clickOnLogo = () => {
+    const clickOnLogo = (): void => {
         setOpenedBurgerMenu(false);
     };
 

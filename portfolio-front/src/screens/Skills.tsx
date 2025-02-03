@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import Ideas from '../assets/images/brainstorming-ampoule.png';
@@ -8,7 +8,7 @@ import Responsive from '../assets/images/responsive-items.png';
 import Seo from '../assets/images/seo.jpg';
 import '../assets/styles/skills.css';
 
-export default function Skills() {
+export default function Skills(): React.ReactElement {
     const animRef = useRef();
     const [skillsElementsInViewport, setSkillsElementsInViewport] =
         useState(null);
@@ -35,14 +35,14 @@ export default function Skills() {
             setSkillsElementsInViewport(null);
             obsSkills.disconnect();
         };
-    }, []);
+    }, [obsSkills]);
 
     useEffect(() => {
         if (skillsElementsInViewport)
             skillsElementsInViewport.forEach((element) => {
                 obsSkills.observe(element, obsOptions);
             });
-    }, [skillsElementsInViewport]);
+    }, [skillsElementsInViewport, obsOptions, obsSkills]);
 
     return (
         <div className='page-container'>

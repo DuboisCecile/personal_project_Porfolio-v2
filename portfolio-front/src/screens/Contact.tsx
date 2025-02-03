@@ -1,6 +1,6 @@
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -18,7 +18,7 @@ interface Form {
     userName: string;
 }
 
-export default function Contact() {
+export default function Contact(): React.ReactElement {
     const {
         register,
         handleSubmit,
@@ -29,10 +29,10 @@ export default function Contact() {
         window.scrollTo(0, 0);
     }, []);
 
-    const sendEmail = async (form: Form) => {
+    const sendEmail = async (form: Form): Promise<void> => {
         try {
             await API.post(
-                `${process.env.REACT_APP_API_BASE_URL}/contactMail`,
+                `${import.meta.env.REACT_APP_API_BASE_URL}/contactMail`,
                 form
             );
             toast.success(<span>Votre message a bien été envoyé&nbsp;!</span>);

@@ -1,4 +1,6 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import MentionsLegales from './components/MentionsLegales';
 import Contact from './screens/Contact';
 import Home from './screens/Home';
@@ -6,7 +8,7 @@ import Portfolio from './screens/Portfolio';
 import Skills from './screens/Skills';
 import WhoAmI from './screens/WhoAmI';
 
-export default function Main() {
+export default function Main(): React.ReactElement {
     return (
         <Routes>
             <Route path='/who' element={<WhoAmI />} />

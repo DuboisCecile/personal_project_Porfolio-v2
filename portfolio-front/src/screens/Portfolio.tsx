@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import AppCC_01 from '../assets/images/app-cc_01.jpg';
@@ -22,7 +22,7 @@ import LogoReact from '../assets/images/React_logo.png';
 
 import '../assets/styles/portfolio.css';
 
-export default function Portfolio() {
+export default function Portfolio(): React.ReactElement {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

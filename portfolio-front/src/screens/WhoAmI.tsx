@@ -1,7 +1,7 @@
-import { createRef, useEffect, useRef, useState } from 'react';
+import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { NavLink } from 'react-router-dom';
 
-import { isMobile } from 'react-device-detect';
 import '../assets/styles/whoAmI.css';
 
 import Brainstorming from '../assets/images/brainstorming.jpg';
@@ -36,21 +36,33 @@ const letterAnim = (
 );
 
 const animalsImagesList = [
-    { id: 0, src: 'rhino.jpg', alt: 'Rhinocéros blanc' },
-    { id: 1, src: 'makis.jpg', alt: 'Makis cattas' },
-    { id: 2, src: 'panthere.jpg', alt: 'Panthère des neiges' },
+    { id: 0, src: '../assets/images/rhino.jpg', alt: 'Rhinocéros blanc' },
+    { id: 1, src: '../assets/images/makis.jpg', alt: 'Makis cattas' },
+    { id: 2, src: '../assets/images/panthere.jpg', alt: 'Panthère des neiges' },
 ];
 
 const hobbiesImagesList = [
-    { id: 0, src: 'jardinage.jpg', alt: 'Jardinage' },
-    { id: 1, src: 'travail-papier.jpg', alt: 'Travail du papier' },
-    { id: 2, src: 'foret.jpg', alt: 'Promenades dans la nature' },
-    { id: 3, src: 'broderie.jpg', alt: 'Broderie à la machine' },
-    { id: 4, src: 'travail-cuir.jpg', alt: 'Travail du cuir' },
-    { id: 5, src: 'trousse-outils.jpg', alt: 'Bricolage' },
+    { id: 0, src: '../assets/images/jardinage.jpg', alt: 'Jardinage' },
+    {
+        id: 1,
+        src: '../assets/images/travail-papier.jpg',
+        alt: 'Travail du papier',
+    },
+    {
+        id: 2,
+        src: '../assets/images/foret.jpg',
+        alt: 'Promenades dans la nature',
+    },
+    {
+        id: 3,
+        src: '../assets/images/broderie.jpg',
+        alt: 'Broderie à la machine',
+    },
+    { id: 4, src: '../assets/images/travail-cuir.jpg', alt: 'Travail du cuir' },
+    { id: 5, src: '../assets/images/trousse-outils.jpg', alt: 'Bricolage' },
 ];
 
-export default function WhoAmI() {
+export default function WhoAmI(): React.ReactElement {
     const containerRef = useRef();
     const imagesRefs = useRef([]);
     const [svgElement, setSvgElement] = useState();
@@ -66,13 +78,13 @@ export default function WhoAmI() {
     const circleFeedback = document.querySelector('#circle-shadow');
     const svgPoint = new DOMPoint();
 
-    const cursorPoint = (e, svg) => {
+    const cursorPoint = (e, svg): DOMPoint => {
         svgPoint.x = e.clientX;
         svgPoint.y = e.clientY;
         return svgPoint.matrixTransform(svg.getScreenCTM().inverse());
     };
 
-    const update = (svgCoords) => {
+    const update = (svgCoords): void => {
         maskedElement.setAttribute('cx', svgCoords.x);
         maskedElement.setAttribute('cy', svgCoords.y);
         circleFeedback.setAttribute('cx', svgCoords.x);
@@ -91,7 +103,7 @@ export default function WhoAmI() {
             clearInterval(animalsTimerIntervalId);
             setAnimalsTimerIntervalId(null);
         }
-    }, [animalsInViewport]);
+    }, [animalsInViewport, animalsTimerIntervalId]);
 
     useEffect(() => {
         if (hobbiesInViewport && !hobbiesTimerIntervalId) {
@@ -105,7 +117,7 @@ export default function WhoAmI() {
             clearInterval(hobbiesTimerIntervalId);
             setHobbiesTimerIntervalId(null);
         }
-    }, [hobbiesInViewport]);
+    }, [hobbiesInViewport, hobbiesTimerIntervalId]);
 
     const whoInViewport = (entries) => {
         entries.forEach((entry) => {
@@ -131,7 +143,8 @@ export default function WhoAmI() {
         });
     };
 
-    const obsWho = new IntersectionObserver(whoInViewport);
+    const obsWho = useMemo(() => new IntersectionObserver(whoInViewport), []);
+
     const obsOptions = {
         root: containerRef.current,
         threshold: 0.5,
@@ -140,7 +153,6 @@ export default function WhoAmI() {
     useEffect(() => {
         window.scrollTo(0, 0);
         imagesRefs.current = [...Array(9)].map(
-            // eslint-disable-next-line no-return-assign
             (ref, index) => (imagesRefs.current[index] = createRef())
         );
         setSvgElement(document.querySelector('svg'));
@@ -152,7 +164,7 @@ export default function WhoAmI() {
             obsWho.disconnect();
             setWhoElementsInViewport(null);
         };
-    }, []);
+    }, [animalsTimerIntervalId, hobbiesTimerIntervalId, obsWho]);
 
     useEffect(() => {
         if (whoElementsInViewport)
@@ -183,8 +195,6 @@ export default function WhoAmI() {
             );
         }
     }, [svgElement]);
-
-    const requestImageFile = require.context('../assets/images', true);
 
     return (
         <div className='page-container' ref={containerRef}>
@@ -273,9 +283,7 @@ export default function WhoAmI() {
                     id='animals'
                     ref={imagesRefs.current[2]}
                     className='inline-photo show-on-scroll'
-                    src={requestImageFile(
-                        `./${animalsImagesList[animalsSliderIndex].src}`
-                    )}
+                    src={animalsImagesList[animalsSliderIndex].src}
                     alt={animalsImagesList[animalsSliderIndex].alt}
                 />
                 <div className='text-block'>
@@ -313,9 +321,7 @@ export default function WhoAmI() {
                     id='hobbies'
                     ref={imagesRefs.current[5]}
                     className='inline-photo show-on-scroll'
-                    src={requestImageFile(
-                        `./${hobbiesImagesList[hobbiesSliderIndex].src}`
-                    )}
+                    src={hobbiesImagesList[hobbiesSliderIndex].src}
                     alt={hobbiesImagesList[hobbiesSliderIndex].alt}
                 />
                 <div className='text-block'>
@@ -360,20 +366,14 @@ export default function WhoAmI() {
                 <div className='self-center'>
                     <div className='text-block'>
                         N'hésitez pas à me
-                        <NavLink
-                            className='contact-link'
-                            path='/contact'
-                            to='/contact'
-                        >
+                        <NavLink className='contact-link' to='/contact'>
                             contacter !
                         </NavLink>
                     </div>
                     {isMobile ? (
                         letterAnim
                     ) : (
-                        <NavLink path='/contact' to='/contact'>
-                            {letterAnim}
-                        </NavLink>
+                        <NavLink to='/contact'>{letterAnim}</NavLink>
                     )}
                 </div>
             </div>

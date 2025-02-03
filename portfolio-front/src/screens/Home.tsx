@@ -42,7 +42,7 @@ export default function Home() {
             homeElementsInViewport.forEach((element) => {
                 obsHome.observe(element);
             });
-    }, [homeElementsInViewport]);
+    }, [homeElementsInViewport, obsHome]);
 
     return (
         <div className='page-container'>

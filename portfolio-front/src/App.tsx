@@ -1,3 +1,4 @@
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 
@@ -6,7 +7,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Main from './Main';
 
-function App() {
+function App(): React.ReactElement {
     const methods = useForm();
 
     return (

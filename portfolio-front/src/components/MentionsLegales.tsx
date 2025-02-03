@@ -1,4 +1,6 @@
-export default function MentionsLegales() {
+import React from 'react';
+
+export default function MentionsLegales(): React.ReactElement {
     return (
         <div className='page-container'>
             <div className='page-content'>
