@@ -1,0 +1,10 @@
+{
+    "watch": ["src", "index.ts"],
+    "ext": "js,ts,json",
+    "exec": "npm run build && npm run start:dev",
+    "options": {
+        "legacyWatch": true,
+        "watch": true,
+        "delay": "250ms"
+    }
+}

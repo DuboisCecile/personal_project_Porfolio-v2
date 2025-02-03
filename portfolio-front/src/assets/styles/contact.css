@@ -1,0 +1,42 @@
+@import url('index.css');
+
+#contact-form {
+  width: 100vw;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-light);
+}
+
+.form-entry {
+  width: 100%;
+}
+
+.form-entry input,
+.form-entry textarea {
+  width: 100%;
+  border-radius: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.form-entry input {
+  height: 2rem;
+}
+
+#links-logo {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem 0 2rem 0;
+}
+
+@media screen and (min-width: 1024px) {
+  #contact-form {
+    width: 60vw;
+  }
+}

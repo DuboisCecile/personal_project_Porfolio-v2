@@ -1,0 +1,87 @@
+.page-content-portfolio {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.project .framed-img {
+  width: 80vw;
+  max-width: 20rem;
+  margin: 0 auto;
+  padding: 1.2rem;
+  background-color: black;
+  border-width: 0.5rem;
+  border-style: solid;
+  border-image: linear-gradient(to right bottom, #cfc09f 22%, #3a2c0f 78%);
+  /* border-image: linear-gradient(to right bottom, #260b3c, #a053df); */
+  border-image-slice: 1;
+}
+
+#hover-motorhome,
+#hover-coho,
+#hover-portfolio,
+#hover-others {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden; /* Hide the element content, while height = 0 */
+  height: 0;
+  opacity: 0;
+  transition: height 0s 1s, opacity 1s 0s;
+  /* duration then delay
+  opacity starts animation (0s delay, 1s duration),
+  height waits 1s and only then instantly (0s) restores initial value (equivalent of display: none in the animation callback). */
+}
+
+#motorhome:hover #hover-motorhome,
+#coho:hover #hover-coho,
+#portfolio:hover #hover-portfolio,
+#others:hover #hover-others {
+  height: auto;
+  opacity: 1;
+  transition: height 0s 0s, opacity 1s 0s;
+  /* both height and opacity start animation without delay (0s),
+  though height takes 0s to complete animation (equivalent of display: block) and opacity takes 1s. */
+}
+
+.text-img {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.with-inline-img {
+  line-height: 2.5rem;
+}
+
+.logo-stack {
+  height: 2rem;
+  vertical-align: middle;
+  margin: 0 0.2rem 0 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .section-content {
+    width: 60vw;
+  }
+}
