@@ -43,38 +43,38 @@ const letterAnim = (
 );
 
 const animalsImagesList = [
-    { id: 0, src: 'src/assets/images/rhino.jpg', alt: 'Rhinocéros blanc' },
-    { id: 1, src: 'src/assets/images/makis.jpg', alt: 'Makis cattas' },
+    { id: 0, src: '../assets/images/rhino.jpg', alt: 'Rhinocéros blanc' },
+    { id: 1, src: '../assets/images/makis.jpg', alt: 'Makis cattas' },
     {
         id: 2,
-        src: 'src/assets/images/panthere.jpg',
+        src: '../assets/images/panthere.jpg',
         alt: 'Panthère des neiges',
     },
 ];
 
 const hobbiesImagesList = [
-    { id: 0, src: 'src/assets/images/jardinage.jpg', alt: 'Jardinage' },
+    { id: 0, src: '../assets/images/jardinage.jpg', alt: 'Jardinage' },
     {
         id: 1,
-        src: 'src/assets/images/travail-papier.jpg',
+        src: '../assets/images/travail-papier.jpg',
         alt: 'Travail du papier',
     },
     {
         id: 2,
-        src: 'src/assets/images/foret.jpg',
+        src: '../assets/images/foret.jpg',
         alt: 'Promenades dans la nature',
     },
     {
         id: 3,
-        src: 'src/assets/images/broderie.jpg',
+        src: '../assets/images/broderie.jpg',
         alt: 'Broderie à la machine',
     },
     {
         id: 4,
-        src: 'src/assets/images/travail-cuir.jpg',
+        src: '../assets/images/travail-cuir.jpg',
         alt: 'Travail du cuir',
     },
-    { id: 5, src: 'src/assets/images/trousse-outils.jpg', alt: 'Bricolage' },
+    { id: 5, src: '../assets/images/trousse-outils.jpg', alt: 'Bricolage' },
 ];
 
 export default function WhoAmI(): React.ReactElement {

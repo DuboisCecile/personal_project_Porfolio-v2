@@ -14,6 +14,8 @@ node_modules
 dist
 dist-ssr
 *.local
+build
+/dossier_API_de_PH_public_html
 
 # Editor directories and files
 .vscode/*
