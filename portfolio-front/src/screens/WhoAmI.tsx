@@ -1,4 +1,11 @@
-import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+    createRef,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import { isMobile } from 'react-device-detect';
 import { NavLink } from 'react-router-dom';
 
@@ -36,165 +43,186 @@ const letterAnim = (
 );
 
 const animalsImagesList = [
-    { id: 0, src: '../assets/images/rhino.jpg', alt: 'Rhinocéros blanc' },
-    { id: 1, src: '../assets/images/makis.jpg', alt: 'Makis cattas' },
-    { id: 2, src: '../assets/images/panthere.jpg', alt: 'Panthère des neiges' },
+    { id: 0, src: 'src/assets/images/rhino.jpg', alt: 'Rhinocéros blanc' },
+    { id: 1, src: 'src/assets/images/makis.jpg', alt: 'Makis cattas' },
+    {
+        id: 2,
+        src: 'src/assets/images/panthere.jpg',
+        alt: 'Panthère des neiges',
+    },
 ];
 
 const hobbiesImagesList = [
-    { id: 0, src: '../assets/images/jardinage.jpg', alt: 'Jardinage' },
+    { id: 0, src: 'src/assets/images/jardinage.jpg', alt: 'Jardinage' },
     {
         id: 1,
-        src: '../assets/images/travail-papier.jpg',
+        src: 'src/assets/images/travail-papier.jpg',
         alt: 'Travail du papier',
     },
     {
         id: 2,
-        src: '../assets/images/foret.jpg',
+        src: 'src/assets/images/foret.jpg',
         alt: 'Promenades dans la nature',
     },
     {
         id: 3,
-        src: '../assets/images/broderie.jpg',
+        src: 'src/assets/images/broderie.jpg',
         alt: 'Broderie à la machine',
     },
-    { id: 4, src: '../assets/images/travail-cuir.jpg', alt: 'Travail du cuir' },
-    { id: 5, src: '../assets/images/trousse-outils.jpg', alt: 'Bricolage' },
+    {
+        id: 4,
+        src: 'src/assets/images/travail-cuir.jpg',
+        alt: 'Travail du cuir',
+    },
+    { id: 5, src: 'src/assets/images/trousse-outils.jpg', alt: 'Bricolage' },
 ];
 
 export default function WhoAmI(): React.ReactElement {
-    const containerRef = useRef();
-    const imagesRefs = useRef([]);
-    const [svgElement, setSvgElement] = useState();
+    const containerRef = useRef<HTMLDivElement>(null);
+    const imagesRefs = useRef<React.RefObject<HTMLImageElement>[]>([]);
+    const [svgElement, setSvgElement] = useState<SVGSVGElement | null>(null);
     const [animalsSliderIndex, setAnimalsSliderIndex] = useState(0);
     const [hobbiesSliderIndex, setHobbiesSliderIndex] = useState(0);
-    const [whoElementsInViewport, setWhoElementsInViewport] = useState(null);
-    const [animalsTimerIntervalId, setAnimalsTimerIntervalId] = useState(null);
     const [animalsInViewport, setAnimalsInViewport] = useState(false);
-    const [hobbiesTimerIntervalId, setHobbiesTimerIntervalId] = useState(0);
     const [hobbiesInViewport, setHobbiesInViewport] = useState(false);
 
-    const maskedElement = document.querySelector('#mask-circle');
-    const circleFeedback = document.querySelector('#circle-shadow');
-    const svgPoint = new DOMPoint();
-
-    const cursorPoint = (e, svg): DOMPoint => {
-        svgPoint.x = e.clientX;
-        svgPoint.y = e.clientY;
-        return svgPoint.matrixTransform(svg.getScreenCTM().inverse());
-    };
-
-    const update = (svgCoords): void => {
-        maskedElement.setAttribute('cx', svgCoords.x);
-        maskedElement.setAttribute('cy', svgCoords.y);
-        circleFeedback.setAttribute('cx', svgCoords.x);
-        circleFeedback.setAttribute('cy', svgCoords.y);
-    };
+    const svgPoint = useMemo(() => new DOMPoint(), []);
 
     useEffect(() => {
-        if (animalsInViewport && !animalsTimerIntervalId) {
-            const animalsTimer = setInterval(() => {
+        window.scrollTo(0, 0);
+        imagesRefs.current = Array(9)
+            .fill(null)
+            .map(() => createRef());
+        setSvgElement(document.querySelector('svg'));
+    }, []);
+
+    useEffect(() => {
+        const whoElementsInViewport =
+            document.querySelectorAll('.show-on-scroll');
+
+        const obsOptions = {
+            threshold: 0.1, // Element is considered visible when 10% is in view
+            rootMargin: '0px 0px -10% 0px', // Slightly reduces the effective viewport
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const entryElement = entry.target as HTMLElement;
+
+                // Only care about elements becoming visible, not leaving the viewport
+                if (entry.isIntersecting) {
+                    entryElement.classList.add('is-visible');
+
+                    // For specific elements, set state
+                    if (entryElement.id === 'animals') {
+                        setAnimalsInViewport(true);
+                    }
+
+                    if (entryElement.id === 'hobbies') {
+                        setHobbiesInViewport(true);
+                    }
+
+                    // Once visible, stop observing this element
+                    observer.unobserve(entryElement);
+                }
+            });
+        }, obsOptions);
+
+        whoElementsInViewport.forEach((element) => {
+            observer.observe(element);
+        });
+
+        return (): void => {
+            observer.disconnect();
+        };
+    }, []);
+
+    // Handle animals slider
+    useEffect(() => {
+        let timer: ReturnType<typeof setTimeout> | null = null;
+
+        if (animalsInViewport) {
+            timer = setInterval(() => {
                 setAnimalsSliderIndex(
                     (index) => (index + 1) % animalsImagesList.length
                 );
             }, 2000);
-            setAnimalsTimerIntervalId(animalsTimer);
-        } else {
-            clearInterval(animalsTimerIntervalId);
-            setAnimalsTimerIntervalId(null);
         }
-    }, [animalsInViewport, animalsTimerIntervalId]);
 
+        return (): void => {
+            if (timer) clearInterval(timer);
+        };
+    }, [animalsInViewport]);
+
+    // Handle hobbies slider
     useEffect(() => {
-        if (hobbiesInViewport && !hobbiesTimerIntervalId) {
-            const hobbiesTimer = setInterval(() => {
+        let timer: ReturnType<typeof setTimeout> | null = null;
+
+        if (hobbiesInViewport) {
+            timer = setInterval(() => {
                 setHobbiesSliderIndex(
                     (index) => (index + 1) % hobbiesImagesList.length
                 );
             }, 2000);
-            setHobbiesTimerIntervalId(hobbiesTimer);
-        } else {
-            clearInterval(hobbiesTimerIntervalId);
-            setHobbiesTimerIntervalId(null);
         }
-    }, [hobbiesInViewport, hobbiesTimerIntervalId]);
 
-    const whoInViewport = (entries) => {
-        entries.forEach((entry) => {
-            const entryRef = imagesRefs?.current.find(
-                (ref) => ref.current?.id === entry.target.id
-            );
-            if (entryRef) {
-                entryRef.current.classList.toggle(
-                    'is-visible',
-                    entry.intersectionRatio > 0
-                );
-
-                if (entry.target.id === 'animals') {
-                    if (entry.intersectionRatio > 0) setAnimalsInViewport(true);
-                    else setAnimalsInViewport(false);
-                }
-
-                if (entry.target.id === 'hobbies') {
-                    if (entry.intersectionRatio > 0) setHobbiesInViewport(true);
-                    else setHobbiesInViewport(false);
-                }
-            }
-        });
-    };
-
-    const obsWho = useMemo(() => new IntersectionObserver(whoInViewport), []);
-
-    const obsOptions = {
-        root: containerRef.current,
-        threshold: 0.5,
-    };
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        imagesRefs.current = [...Array(9)].map(
-            (ref, index) => (imagesRefs.current[index] = createRef())
-        );
-        setSvgElement(document.querySelector('svg'));
-        setWhoElementsInViewport(document.querySelectorAll('.show-on-scroll'));
-
-        return () => {
-            clearInterval(animalsTimerIntervalId);
-            clearInterval(hobbiesTimerIntervalId);
-            obsWho.disconnect();
-            setWhoElementsInViewport(null);
+        return (): void => {
+            if (timer) clearInterval(timer);
         };
-    }, [animalsTimerIntervalId, hobbiesTimerIntervalId, obsWho]);
+    }, [hobbiesInViewport]);
 
-    useEffect(() => {
-        if (whoElementsInViewport)
-            whoElementsInViewport.forEach((element) => {
-                obsWho.observe(element, obsOptions);
-            });
-    }, [whoElementsInViewport]);
+    // Cursor point function
+    const cursorPoint = useCallback(
+        (e: MouseEvent | TouchEvent, svg: SVGSVGElement): DOMPoint => {
+            if (e instanceof MouseEvent) {
+                svgPoint.x = e.clientX;
+                svgPoint.y = e.clientY;
+            } else if (e instanceof TouchEvent && e.touches.length > 0) {
+                svgPoint.x = e.touches[0].clientX;
+                svgPoint.y = e.touches[0].clientY;
+            }
+            const screenCTM = svg.getScreenCTM();
+            if (screenCTM) {
+                return svgPoint.matrixTransform(screenCTM.inverse());
+            }
+            return svgPoint;
+        },
+        [svgPoint]
+    );
 
+    // Update function
+    const update = useCallback((svgCoords: DOMPoint): void => {
+        const maskedElement = document.querySelector('#mask-circle');
+        const circleFeedback = document.querySelector('#circle-shadow');
+
+        if (maskedElement && circleFeedback) {
+            maskedElement.setAttribute('cx', svgCoords.x.toString());
+            maskedElement.setAttribute('cy', svgCoords.y.toString());
+            circleFeedback.setAttribute('cx', svgCoords.x.toString());
+            circleFeedback.setAttribute('cy', svgCoords.y.toString());
+        }
+    }, []);
+
+    // Set up event listeners
     useEffect(() => {
         if (svgElement) {
-            window.addEventListener(
-                'mousemove',
-                (e) => {
-                    update(cursorPoint(e, svgElement));
-                },
-                false
-            );
+            const handleMouseMove = (e: MouseEvent): void => {
+                update(cursorPoint(e, svgElement));
+            };
 
-            document.addEventListener(
-                'touchmove',
-                (e) => {
-                    const touch = e.targetTouches[0];
-                    if (touch) {
-                        update(cursorPoint(touch, svgElement));
-                    }
-                },
-                false
-            );
+            const handleTouchMove = (e: TouchEvent): void => {
+                update(cursorPoint(e, svgElement));
+            };
+
+            window.addEventListener('mousemove', handleMouseMove, false);
+            document.addEventListener('touchmove', handleTouchMove, false);
+
+            return (): void => {
+                window.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('touchmove', handleTouchMove);
+            };
         }
-    }, [svgElement]);
+    }, [svgElement, cursorPoint, update]);
 
     return (
         <div className='page-container' ref={containerRef}>
@@ -213,7 +241,7 @@ export default function WhoAmI(): React.ReactElement {
                             id='yoga'
                             className='yoga-image'
                             href={Yoga}
-                            alt='Rayons X'
+                            // alt='Rayons X'
                         />
                     </svg>
                     <svg

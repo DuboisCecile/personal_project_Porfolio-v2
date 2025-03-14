@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import Ideas from '../assets/images/brainstorming-ampoule.png';
@@ -13,20 +13,18 @@ export default function Skills(): React.ReactElement {
     const [skillsElementsInViewport, setSkillsElementsInViewport] =
         useState(null);
 
-    const skillsInViewport = (entries) => {
-        entries.forEach((entry) => {
-            if (entry.target.id === 'creeks')
-                animRef.current?.classList.toggle(
-                    'animated',
-                    entry.isIntersecting
-                );
-        });
-    };
-
-    const obsSkills = new IntersectionObserver(skillsInViewport);
-    const obsOptions = {
-        // threshold: 1,
-    };
+    const obsSkills = useMemo(() => {
+        const skillsInViewport = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.target.id === 'creeks')
+                    animRef.current?.classList.toggle(
+                        'animated',
+                        entry.isIntersecting
+                    );
+            });
+        };
+        return new IntersectionObserver(skillsInViewport);
+    }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -38,11 +36,14 @@ export default function Skills(): React.ReactElement {
     }, [obsSkills]);
 
     useEffect(() => {
+        const obsOptions = {
+            // threshold: 1,
+        };
         if (skillsElementsInViewport)
             skillsElementsInViewport.forEach((element) => {
                 obsSkills.observe(element, obsOptions);
             });
-    }, [skillsElementsInViewport, obsOptions, obsSkills]);
+    }, [skillsElementsInViewport, obsSkills]);
 
     return (
         <div className='page-container'>

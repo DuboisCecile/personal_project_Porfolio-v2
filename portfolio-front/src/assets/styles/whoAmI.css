@@ -7,206 +7,218 @@
 /* *************************** */
 
 .who-am-i-svg {
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: calc(100vw * 936 / 1667);
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: calc(100vw * 936 / 1667);
 }
 
 #who-am-i-container {
-  position: relative;
-  width: 100vw;
-  height: calc(100vw * 936 / 1667);
-  touch-action: none;
+    position: relative;
+    width: 100vw;
+    height: calc(100vw * 936 / 1667);
+    touch-action: none;
 }
 
 .yoga-image {
-  width: 100vw;
-  height: calc(100vw * 936 / 1667);
+    width: 100vw;
+    height: calc(100vw * 936 / 1667);
 }
 
 .inline-photo {
-  border-radius: 0.25em;
-  box-shadow: 1em 1em 2em 0.25em rgba(0, 0, 0, 0.2);
-  margin: 1em 0;
-  opacity: 0;
-  -webkit-transform: translateY(4em) rotateZ(-8deg);
-  transform: translateY(4em) rotateZ(-8deg);
-  width: 80%;
-  max-width: 38rem;
-  will-change: transform, opacity;
+    border-radius: 0.25em;
+    box-shadow: 1em 1em 2em 0.25em rgba(0, 0, 0, 0.2);
+    margin: 1em 0;
+    opacity: 0;
+    -webkit-transform: translateY(4em) rotateZ(-8deg);
+    transform: translateY(4em) rotateZ(-8deg);
+    width: 80%;
+    max-width: 38rem;
+    will-change: transform, opacity;
 }
 
 .inline-photo.is-visible {
-  -webkit-animation: visible-animation 0.5s forwards;
-  animation: visible-animation 0.5s forwards;
+    -webkit-animation: visible-animation 0.5s forwards;
+    animation: visible-animation 0.5s forwards;
 }
 
 @keyframes visible-animation {
-  from {
-    display: none;
-  }
-  to {
-    display: block;
-    opacity: 1;
-    -webkit-transform: rotateZ(-2deg);
-    transform: rotateZ(-2deg);
-  }
+    from {
+        display: none;
+    }
+    to {
+        display: block;
+        opacity: 1;
+        -webkit-transform: rotateZ(-2deg);
+        transform: rotateZ(-2deg);
+    }
 }
 
 /* ******** LETTER ******** */
 #letter-container {
-  position: relative;
-  width: 14rem;
-  height: 16rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
+    position: relative;
+    width: 14rem;
+    height: 16rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
 }
 
 #animated-mail {
-  position: absolute;
-  height: 10rem;
-  width: 14rem;
-  -webkit-transition: 0.4s;
-  -moz-transition: 0.4s;
-  transition: 0.4s;
+    position: absolute;
+    height: 10rem;
+    width: 14rem;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    transition: 0.4s;
 }
 
 #enveloppe-body {
-  position: absolute;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 7rem 14rem;
-  border-color: transparent transparent #5f82e3 transparent;
-  z-index: 2;
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 7rem 14rem;
+    border-color: transparent transparent #5f82e3 transparent;
+    z-index: 2;
 }
 
 #top-fold {
-  position: absolute;
-  top: 3rem;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 3.5rem 7rem 0 7rem;
-  -webkit-transform-origin: 50% 0%;
-  -webkit-transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
-  -moz-transform-origin: 50% 0%;
-  -moz-transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
-  transform-origin: 50% 0%;
-  transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
-  border-color: #557de9 transparent transparent transparent;
-  z-index: 2;
+    position: absolute;
+    top: 3rem;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3.5rem 7rem 0 7rem;
+    -webkit-transform-origin: 50% 0%;
+    -webkit-transition:
+        transform 0.4s 0.4s,
+        z-index 0.2s 0.4s;
+    -moz-transform-origin: 50% 0%;
+    -moz-transition:
+        transform 0.4s 0.4s,
+        z-index 0.2s 0.4s;
+    transform-origin: 50% 0%;
+    transition:
+        transform 0.4s 0.4s,
+        z-index 0.2s 0.4s;
+    border-color: #557de9 transparent transparent transparent;
+    z-index: 2;
 }
 
 #back-fold {
-  position: absolute;
-  bottom: 0;
-  width: 14rem;
-  height: 7rem;
-  background: #557de9;
-  z-index: 0;
+    position: absolute;
+    bottom: 0;
+    width: 14rem;
+    height: 7rem;
+    background: #557de9;
+    z-index: 0;
 }
 
 #left-fold {
-  position: absolute;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 3.5rem 0 3.5rem 7rem;
-  border-color: transparent transparent transparent #6184e4;
-  z-index: 2;
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3.5rem 0 3.5rem 7rem;
+    border-color: transparent transparent transparent #6184e4;
+    z-index: 2;
 }
 
 #letter {
-  left: 1rem;
-  bottom: 0;
-  position: absolute;
-  width: 12rem;
-  height: 3.75rem;
-  background: white;
-  z-index: 1;
-  overflow: hidden;
-  -webkit-transition: 0.4s 0.2s;
-  -moz-transition: 0.4s 0.2s;
-  transition: 0.4s 0.2s;
-  color: black;
+    left: 1rem;
+    bottom: 0;
+    position: absolute;
+    width: 12rem;
+    height: 3.75rem;
+    background: white;
+    z-index: 1;
+    overflow: hidden;
+    -webkit-transition: 0.4s 0.2s;
+    -moz-transition: 0.4s 0.2s;
+    transition: 0.4s 0.2s;
+    color: black;
 }
 
 #letter-title {
-  padding: 0.8rem;
-  font-family: 'Rock Salt', cursive;
-  font-size: 0.5rem;
+    padding: 0.8rem;
+    font-family: 'Rock Salt', cursive;
+    font-size: 0.5rem;
 }
 
 #shadow {
-  position: absolute;
-  top: 14rem;
-  left: 50%;
-  width: 22rem;
-  height: 2rem;
-  transition: 0.4s;
-  transform: translateX(-50%);
-  /* -webkit-transition: 0.4s;
+    position: absolute;
+    top: 14rem;
+    left: 50%;
+    width: 22rem;
+    height: 2rem;
+    transition: 0.4s;
+    transform: translateX(-50%);
+    /* -webkit-transition: 0.4s;
   -webkit-transform: translateX(-50%);
   -moz-transition: 0.4s;
   -moz-transform: translateX(-50%); */
-  border-radius: 100%;
-  background: radial-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0)
-  );
+    border-radius: 100%;
+    background: radial-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0)
+    );
 }
 
 #letter-container:hover #animated-mail,
 #letter-container:active #animated-mail {
-  transform: translateY(3.5rem);
-  -webkit-transform: translateY(3.5rem);
-  -moz-transform: translateY(3.5rem);
+    transform: translateY(3.5rem);
+    -webkit-transform: translateY(3.5rem);
+    -moz-transform: translateY(3.5rem);
 }
 
 #letter-container:hover #top-fold,
 #letter-container:active #top-fold {
-  transition: transform 0.4s, z-index 0.2s;
-  transform: rotateX(180deg);
-  -webkit-transition: transform 0.4s, z-index 0.2s;
-  -webkit-transform: rotateX(180deg);
-  -moz-transition: transform 0.4s, z-index 0.2s;
-  -moz-transform: rotateX(180deg);
-  z-index: 0;
+    transition:
+        transform 0.4s,
+        z-index 0.2s;
+    transform: rotateX(180deg);
+    -webkit-transition:
+        transform 0.4s,
+        z-index 0.2s;
+    -webkit-transform: rotateX(180deg);
+    -moz-transition:
+        transform 0.4s,
+        z-index 0.2s;
+    -moz-transform: rotateX(180deg);
+    z-index: 0;
 }
 
 #letter-container:hover #letter,
 #letter-container:active #letter {
-  height: 11.25rem;
+    height: 11.25rem;
 }
 #letter-container:hover #shadow,
 #letter-container:active #shadow {
-  width: 15.6rem;
+    width: 15.6rem;
 }
 
 /* ******************************* */
 /* ******** MEDIA QUERIES ******** */
 /* ******************************* */
 @media screen and (min-width: 1024px) {
-  #who-am-i-container {
-    width: 60vw;
-    height: calc(60vw * 936 / 1667);
-  }
+    #who-am-i-container {
+        width: 60vw;
+        height: calc(60vw * 936 / 1667);
+    }
 
-  .who-am-i-svg {
-    width: 60vw;
-    height: calc(60vw * 936 / 1667);
-  }
+    .who-am-i-svg {
+        width: 60vw;
+        height: calc(60vw * 936 / 1667);
+    }
 
-  .yoga-image {
-    width: 60vw;
-    height: calc(60vw * 936 / 1667);
-  }
+    .yoga-image {
+        width: 60vw;
+        height: calc(60vw * 936 / 1667);
+    }
 }

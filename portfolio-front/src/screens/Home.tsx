@@ -6,12 +6,12 @@ import Mug from '../assets/images/mug.png';
 import WallPoster from '../assets/images/mur_affiche.jpg';
 
 export default function Home() {
-    const mugRef = useRef();
-    const homeImageRef = useRef();
+    const mugRef = useRef<HTMLImageElement>(null);
+    const homeImageRef = useRef<HTMLImageElement>(null);
     const [homeElementsInViewport, setHomeElementsInViewport] =
         useState<NodeListOf<Element> | null>(null);
 
-    const homeInViewport = (entries) => {
+    const homeInViewport = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
             if (entry.target.id === 'home-image')
                 homeImageRef.current?.classList.toggle(
