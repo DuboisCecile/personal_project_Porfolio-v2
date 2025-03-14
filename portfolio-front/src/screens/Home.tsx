@@ -1,41 +1,54 @@
-import { useEffect, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import { NavLink } from 'react-router-dom';
 import '../assets/styles/home.css';
 
 import Mug from '../assets/images/mug.png';
 import WallPoster from '../assets/images/mur_affiche.jpg';
 
-export default function Home() {
+export default function Home(): React.ReactElement {
     const mugRef = useRef<HTMLImageElement>(null);
     const homeImageRef = useRef<HTMLImageElement>(null);
     const [homeElementsInViewport, setHomeElementsInViewport] =
         useState<NodeListOf<Element> | null>(null);
 
-    const homeInViewport = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry) => {
-            if (entry.target.id === 'home-image')
-                homeImageRef.current?.classList.toggle(
-                    'home-image-is-inViewport',
-                    entry.isIntersecting
-                );
-            if (entry.target.id === 'mug')
-                mugRef.current?.classList.toggle(
-                    'mug-is-inViewport',
-                    entry.isIntersecting
-                );
-        });
-    };
+    const homeInViewport = useCallback(
+        (entries: IntersectionObserverEntry[]): void => {
+            entries.forEach((entry) => {
+                if (entry.target.id === 'home-image')
+                    homeImageRef.current?.classList.toggle(
+                        'home-image-is-inViewport',
+                        entry.isIntersecting
+                    );
+                if (entry.target.id === 'mug')
+                    mugRef.current?.classList.toggle(
+                        'mug-is-inViewport',
+                        entry.isIntersecting
+                    );
+            });
+        },
+        []
+    );
 
-    const obsHome = new IntersectionObserver(homeInViewport);
+    const obsHome = useMemo(
+        () => new IntersectionObserver(homeInViewport),
+        [homeInViewport]
+    );
 
     useEffect(() => {
         window.scrollTo(0, 0);
         setHomeElementsInViewport(document.querySelectorAll('.checkVP'));
-        return () => {
+
+        return (): void => {
             setHomeElementsInViewport(null);
             obsHome.disconnect();
         };
-    }, []);
+    }, [obsHome]);
 
     useEffect(() => {
         if (homeElementsInViewport)

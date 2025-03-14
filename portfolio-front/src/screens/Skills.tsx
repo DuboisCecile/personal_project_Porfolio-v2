@@ -8,13 +8,19 @@ import Responsive from '../assets/images/responsive-items.png';
 import Seo from '../assets/images/seo.jpg';
 import '../assets/styles/skills.css';
 
+interface IntersectionObserverEntryWithId extends IntersectionObserverEntry {
+    target: Element & { id: string };
+}
+
 export default function Skills(): React.ReactElement {
-    const animRef = useRef();
+    const animRef = useRef<HTMLImageElement>(null);
     const [skillsElementsInViewport, setSkillsElementsInViewport] =
-        useState(null);
+        useState<NodeListOf<Element> | null>(null);
 
     const obsSkills = useMemo(() => {
-        const skillsInViewport = (entries) => {
+        const skillsInViewport = (
+            entries: IntersectionObserverEntryWithId[]
+        ): void => {
             entries.forEach((entry) => {
                 if (entry.target.id === 'creeks')
                     animRef.current?.classList.toggle(
@@ -29,19 +35,16 @@ export default function Skills(): React.ReactElement {
     useEffect(() => {
         window.scrollTo(0, 0);
         setSkillsElementsInViewport(document.querySelectorAll('#creeks'));
-        return () => {
+        return (): void => {
             setSkillsElementsInViewport(null);
             obsSkills.disconnect();
         };
     }, [obsSkills]);
 
     useEffect(() => {
-        const obsOptions = {
-            // threshold: 1,
-        };
         if (skillsElementsInViewport)
             skillsElementsInViewport.forEach((element) => {
-                obsSkills.observe(element, obsOptions);
+                obsSkills.observe(element);
             });
     }, [skillsElementsInViewport, obsSkills]);
 
