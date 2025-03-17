@@ -32,7 +32,7 @@ export default function Contact(): React.ReactElement {
     const sendEmail = async (form: Form): Promise<void> => {
         try {
             await API.post(
-                `${import.meta.env.REACT_APP_API_BASE_URL}/contactMail`,
+                `${import.meta.env.VITE_API_BASE_URL}/contactMail`,
                 form
             );
             toast.success(<span>Votre message a bien été envoyé&nbsp;!</span>);
@@ -43,7 +43,7 @@ export default function Contact(): React.ReactElement {
                     Il y a eu un problème lors de l'envoi du message&nbsp;!
                 </span>
             );
-            window.console.log(err);
+            console.error(err);
         }
     };
 
