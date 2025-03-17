@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import LogoAPIPlatform from '../assets/images/api_platform_logo.png';
 import AppCC_01 from '../assets/images/app-cc_01.jpg';
 import AppCC_02 from '../assets/images/app-cc_02.jpg';
 import AppCC_03 from '../assets/images/app-cc_03.jpg';
@@ -13,13 +14,19 @@ import AppCC_09 from '../assets/images/app-cc_09.jpg';
 import BoitierCoho from '../assets/images/boitier-coho.jpg';
 import Motorhome from '../assets/images/camping-car_isolé.png';
 import CaptureEcranGamelle from '../assets/images/capture-ecran-gamelle.png';
+import MetalWorkers from '../assets/images/fabrication_metal_red.jpg';
 import LogoCoho from '../assets/images/logo-coho-new-blanc.png';
 import LogoNode from '../assets/images/logo-Node-blanc.png';
+import LogoMariaDB from '../assets/images/mariadb_logo_blanc.png';
+import PoolWorkers from '../assets/images/ouvriers_piscines_red.jpg';
 import LogoPHP from '../assets/images/PHP_logo.png';
+import Pool from '../assets/images/pool.jpg';
 import PortableCoho from '../assets/images/portable_coho.jpg';
 import LogoPython from '../assets/images/python_logo.png';
 import LogoReact from '../assets/images/React_logo.png';
-
+import HeadOfITDevelopment from '../assets/images/responsable_developpements.jpg';
+import LogoSage from '../assets/images/sage_logo.png';
+import LogoSymfony from '../assets/images/symfony_logo.png';
 import '../assets/styles/portfolio.css';
 
 export default function Portfolio(): React.ReactElement {
@@ -33,6 +40,110 @@ export default function Portfolio(): React.ReactElement {
                 {isMobile && (
                     <div className='text-block page-title'>Porfolio</div>
                 )}
+                <section id='pools' className='project'>
+                    <div className='section-content'>
+                        <img className='framed-img' src={Pool} alt='Piscine' />
+                        <div
+                            id='hover-pools'
+                            className='section-content-portfolio'
+                        >
+                            <div className='text-block section-title'>
+                                Intranet d'un fabricant de liners et de
+                                couvertures pour piscines
+                            </div>
+                            <div className='text-block'>
+                                Pendant 2 ans, j'ai fait partie de l'équipe
+                                informatique du groupe Platinium II, leader
+                                européen de la fabrication de liners et de
+                                couvertures pour piscines. J'ai travaillé sur la
+                                refonte de l'intranet du groupe, nécessaire aux
+                                différents services des 7 sites (6 usines et 1
+                                entrepôt de matériel).
+                            </div>
+                            <div className='text-block with-inline-img strong-italic'>
+                                Cet intranet utilisait différentes technologies
+                                :
+                                <img
+                                    className='logo-stack'
+                                    src={LogoReact}
+                                    alt='Logo React'
+                                />
+                                {', '}
+                                <img
+                                    className='logo-stack'
+                                    src={LogoSymfony}
+                                    alt='Logo Symfony'
+                                />
+                                {', '}
+                                <img
+                                    className='logo-stack'
+                                    src={LogoAPIPlatform}
+                                    alt='Logo API Platform'
+                                />
+                                {', '}
+                                <img
+                                    className='logo-stack'
+                                    src={LogoMariaDB}
+                                    alt='Logo MariaDB'
+                                />
+                                . Nous communiquions aussi avec une base de
+                                données
+                                <img
+                                    className='logo-stack'
+                                    src={LogoSage}
+                                    alt='Logo Sage'
+                                />
+                                {
+                                    " afin de mettre à jour cette dernière, ou d'aller y chercher des informations."
+                                }
+                            </div>
+                            <div className='text-block'>
+                                J'ai tout d'abord travaillé sur le module "SAV"
+                                (Service Après-Vente), qui permet aux clients de
+                                signaler un problème sur un produit, et aux
+                                techniciens de l'usine de suivre la réparation.
+                                <br />
+                                Ce module a été conçu en étroite collaboration
+                                avec les personnes du service SAV, afin de
+                                répondre de la façon la plus précise possible à
+                                leurs demandes.
+                            </div>
+                            <img
+                                className='img-resp'
+                                src={PoolWorkers}
+                                alt='Réparation de piscines'
+                            />
+                            <div className='text-block'>
+                                J'ai aussi refait le "planning" des usines de
+                                fabrication de volets de piscines, afin de
+                                pouvoir suivre chaque commande de A à Z, c'est à
+                                dire de la réception de la commande à la
+                                livraison du produit fini.
+                            </div>
+                            <img
+                                className='img-resp'
+                                src={MetalWorkers}
+                                alt='Travail du métal'
+                            />
+                            <div className='text-block strong-italic'>
+                                Puis, après 14 mois, je suis aussi devenue
+                                responsable du développement informatique, dans
+                                l'unique équipe informatique du groupe. Je
+                                gérais alors les projets de développement
+                                informatiques (en interne et en externe),
+                                l'équipe de développement interne et je
+                                coordonnais les échanges avec les prestataires
+                                externes (Sage, commande en ligne, etc.)
+                            </div>
+                            <img
+                                className='img-resp'
+                                src={HeadOfITDevelopment}
+                                alt='Responsable des développements informatiques'
+                            />
+                        </div>
+                    </div>
+                </section>
+                <div className='divider' />
                 <section id='motorhome' className='project'>
                     <div className='section-content'>
                         <img
@@ -40,13 +151,15 @@ export default function Portfolio(): React.ReactElement {
                             src={Motorhome}
                             alt='Camping-car'
                         />
-                        <div id='hover-motorhome'>
+                        <div
+                            id='hover-motorhome'
+                            className='section-content-portfolio'
+                        >
                             <div className='text-block section-title'>
                                 Application de commandes de camping-cars
                             </div>
                             <div className='text-block'>
-                                Le projet le plus important que j'ai développé
-                                jusqu'à présent est une application de gestion
+                                J'ai aussi développé une application de gestion
                                 de commandes de camping-cars de la part de
                                 concessions, auprès de la branche française d'un
                                 constructeur italien (qui était mon client).
@@ -196,11 +309,6 @@ export default function Portfolio(): React.ReactElement {
                                 src={AppCC_09}
                                 alt='Application camping-cars - Commande'
                             />
-                            <div className='text-block strong-italic'>
-                                Cette application est désormais utilisée au
-                                quotidien par le constructeur, et plus de 125
-                                concessions.
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -212,7 +320,10 @@ export default function Portfolio(): React.ReactElement {
                             src={LogoCoho}
                             alt='Logo Coho'
                         />
-                        <div id='hover-coho'>
+                        <div
+                            id='hover-coho'
+                            className='section-content-portfolio'
+                        >
                             <div className='text-block section-title'>
                                 Sous-traitance d'un bloc d'application pour le
                                 boîtier{' '}
@@ -307,7 +418,10 @@ export default function Portfolio(): React.ReactElement {
                         <div className='logo-font framed-img'>
                             Cécile Dubois
                         </div>
-                        <div id='hover-portfolio'>
+                        <div
+                            id='hover-portfolio'
+                            className='section-content-portfolio'
+                        >
                             <div className='text-block section-title'>
                                 Ce site !
                             </div>
@@ -354,7 +468,10 @@ export default function Portfolio(): React.ReactElement {
                         <div className='text-img framed-img'>
                             Autres projets
                         </div>
-                        <div id='hover-others'>
+                        <div
+                            id='hover-others'
+                            className='section-content-portfolio'
+                        >
                             <div className='text-block'>
                                 Pendant ma formation à la Wild Code School de
                                 Lyon, j'ai développé plusieurs projets, dont un

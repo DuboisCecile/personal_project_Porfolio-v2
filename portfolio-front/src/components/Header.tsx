@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import LogoCecileDubois from '../assets/images/logo_cecile_dubois_blanc.svg';
+
 export default function Header(): React.ReactElement {
     const [openedBurgerMenu, setOpenedBurgerMenu] = useState(false);
     const [btnBurger, setBtnBurger] = useState<HTMLElement | null>(null);
@@ -38,7 +40,7 @@ export default function Header(): React.ReactElement {
         <header>
             <div id='logo-and-burger-div'>
                 <NavLink className='logo-font' to='/' onClick={clickOnLogo}>
-                    Cécile Dubois
+                    <img src={LogoCecileDubois} height={100} alt='Logo' />
                 </NavLink>
                 <button
                     id='btn-burger'

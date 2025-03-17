@@ -60,7 +60,9 @@ export default function Home(): React.ReactElement {
     return (
         <div className='page-container'>
             <div className='page-content'>
-                <h1 className='text-block page-title'>Développeuse web</h1>
+                <h1 className='text-block page-title'>
+                    Développeuse de logiciels et créatrice de sites internet
+                </h1>
                 <div>
                     <img
                         id='home-image'
@@ -74,7 +76,13 @@ export default function Home(): React.ReactElement {
                     <p>
                         Vous cherchez un développeur web pour{' '}
                         <span className='strong-text'>
-                            concevoir votre site internet
+                            concevoir une application parfaitement adaptée à
+                            votre métier
+                        </span>
+                        , ou{' '}
+                        <span className='strong-text'>
+                            un site internet qui sera le reflet de votre
+                            entreprise
                         </span>{' '}
                         ?
                     </p>
@@ -83,13 +91,7 @@ export default function Home(): React.ReactElement {
                         Javascript, PHP ou encore Python ne sont pour vous que
                         des gros mots ?
                     </p>
-                    <p>
-                        Ou bien vous avez besoin d'aide pour{' '}
-                        <span className='strong-text'>
-                            concevoir une application
-                        </span>{' '}
-                        ?
-                    </p>
+
                     <p>
                         Je suis votre homme ! Ou plutôt... je suis votre femme !
                     </p>

@@ -12,11 +12,20 @@ import { NavLink } from 'react-router-dom';
 import '../assets/styles/whoAmI.css';
 
 import Brainstorming from '../assets/images/brainstorming.jpg';
+import broderie from '../assets/images/broderie.jpg';
 import Landscape from '../assets/images/campagne.jpg';
 import Cherry from '../assets/images/cerisier-abeille.jpg';
 import Family from '../assets/images/famille.jpg';
+import foret from '../assets/images/foret.jpg';
+import jardinage from '../assets/images/jardinage.jpg';
+import makis from '../assets/images/makis.jpg';
 import Computer from '../assets/images/ordinateur.png';
+import panthere from '../assets/images/panthere.jpg';
 import PlanB from '../assets/images/plan-B.jpg';
+import rhino from '../assets/images/rhino.jpg';
+import travailCuir from '../assets/images/travail-cuir.jpg';
+import travailPapier from '../assets/images/travail-papier.jpg';
+import trousseOutils from '../assets/images/trousse-outils.jpg';
 import Yoga from '../assets/images/yoga-01.jpg';
 import YogaSkeleton from '../assets/images/yoga_skeleton_basket.png';
 import ZooMap from '../assets/images/zoo-map.jpg';
@@ -43,38 +52,38 @@ const letterAnim = (
 );
 
 const animalsImagesList = [
-    { id: 0, src: '../assets/images/rhino.jpg', alt: 'Rhinocéros blanc' },
-    { id: 1, src: '../assets/images/makis.jpg', alt: 'Makis cattas' },
+    { id: 0, src: rhino, alt: 'Rhinocéros blanc' },
+    { id: 1, src: makis, alt: 'Makis cattas' },
     {
         id: 2,
-        src: '../assets/images/panthere.jpg',
+        src: panthere,
         alt: 'Panthère des neiges',
     },
 ];
 
 const hobbiesImagesList = [
-    { id: 0, src: '../assets/images/jardinage.jpg', alt: 'Jardinage' },
+    { id: 0, src: jardinage, alt: 'Jardinage' },
     {
         id: 1,
-        src: '../assets/images/travail-papier.jpg',
+        src: travailPapier,
         alt: 'Travail du papier',
     },
     {
         id: 2,
-        src: '../assets/images/foret.jpg',
+        src: foret,
         alt: 'Promenades dans la nature',
     },
     {
         id: 3,
-        src: '../assets/images/broderie.jpg',
+        src: broderie,
         alt: 'Broderie à la machine',
     },
     {
         id: 4,
-        src: '../assets/images/travail-cuir.jpg',
+        src: travailCuir,
         alt: 'Travail du cuir',
     },
-    { id: 5, src: '../assets/images/trousse-outils.jpg', alt: 'Bricolage' },
+    { id: 5, src: trousseOutils, alt: 'Bricolage' },
 ];
 
 export default function WhoAmI(): React.ReactElement {
@@ -354,9 +363,9 @@ export default function WhoAmI(): React.ReactElement {
                 />
                 <div className='text-block'>
                     Mon désir de reconversion a coïncidé avec le début de la
-                    pandémie, ce qui ne m'a pas réellement perturbée. Je suis
-                    très adaptable et résiliente, et lorsque le plan A ne
-                    fonctionne pas... je passe rapidement au plan B !
+                    pandémie de Covid, ce qui ne m'a pas réellement perturbée.
+                    Je suis très adaptable et résiliente, et lorsque le plan A
+                    ne fonctionne pas... je passe rapidement au plan B !
                 </div>
                 <img
                     id='planB'
@@ -381,8 +390,8 @@ export default function WhoAmI(): React.ReactElement {
                 />
                 <div className='text-block'>
                     Désormais développeuse web, je mets mes compétences à votre
-                    disposition pour tout projet de site internet ou
-                    d'application.
+                    disposition pour tout projet d'application ou de site
+                    internet.
                 </div>
                 <img
                     id='website'

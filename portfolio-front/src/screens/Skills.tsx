@@ -63,30 +63,34 @@ export default function Skills(): React.ReactElement {
                     alt='Femme surfant sur un ordinateur'
                 />
                 <div className='text-block'>
-                    Un site doit "parler" aux personnes qui le consultent.
-                    L'utilisateur doit s'y retrouver, y naviguer facilement et
-                    ne pas perdre de temps à chercher une information. Il doit
-                    aimer ce qu'il a vu sur ce site... sinon il n'y reviendra
+                    Un site ou une application doit "parler" aux personnes qui
+                    le consultent. L'utilisateur doit s'y retrouver, y naviguer
+                    facilement et ne pas perdre de temps à chercher une
+                    information ou à exécuter une tâche. Il doit aimer ce qu'il
+                    a vu sur cette application... sinon il n'y reviendra
                     jamais&nbsp;!
                     <br />
                     Ce travail de maquettage est la première étape que je
                     réalise lorsque je commence la conception d'un nouveau site
-                    web.
+                    web ou d'une application.
                 </div>
                 <div className='text-block section-title'>
                     A l'écoute du client
                 </div>
                 <img className='img-resp' src={Ideas} alt="Partage d'idées" />
                 <div className='text-block'>
-                    Un développeur ne doit pas concevoir un site selon ses
+                    Un développeur ne doit pas concevoir un logiciel selon ses
                     propres goûts. Le design et le contenu doivent bien
                     évidemment être en lien avec ce qu'ils doivent montrer
                     (identité de marque, thème visuel en adéquation avec
-                    l'environnement du produit, etc.).
+                    l'environnement du produit, processus métiers à respecter,
+                    etc.).
                     <br />
-                    Il faut aussi définir en amont le but de ce site : s'agit-il
-                    de vendre un produit&nbsp;? De se faire connaître&nbsp;? De
-                    pouvoir communiquer des informations&nbsp;?
+                    Il faut aussi définir en amont le but de ce site ou de cette
+                    application : s'agit-il de vendre un produit&nbsp;? De se
+                    faire connaître&nbsp;? De pouvoir communiquer des
+                    informations&nbsp;? Est-ce une application utilisée en
+                    interne, dans un atelier, par exemple ?
                     <br />
                     J'échange donc très régulièrement avec le client pour qui je
                     développe le site ou l'application. Ses avis sont très
