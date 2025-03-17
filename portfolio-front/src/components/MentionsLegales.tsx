@@ -21,16 +21,15 @@ export default function MentionsLegales(): React.ReactElement {
                         :
                         <br />
                         <br />
-                        Propriétaire du site : Cécile Dubois - 292 route de la
-                        Maze - 07340 Vinzieux - France
+                        Propriétaire du site : Cécile Dubois - Vinzieux - France
                         <br />
                         SIRET : 909 954 745 00016
                         <br />
-                        duboiscecilepro@gmail.com
+                        contact@duboiscecile.fr
                         <br />
-                        06 87 59 05 24
+                        +33 7 66 07 07 30
                         <br />
-                        Créateur:/webmaster : Cécile Dubois
+                        Créateur/webmaster : Cécile Dubois
                         <br />
                         Responsable de la publication : Cécile Dubois
                         <br />
@@ -40,6 +39,9 @@ export default function MentionsLegales(): React.ReactElement {
                         <br /> https://www.planethoster.com/
                         <br /> FR (Nº Vert): 0 805 080 426 <br />
                         FR: +33 1 76 60 41 43
+                        <br />
+                        <br />
+                        Data centers : France, Suisse
                     </p>
                 </div>
                 <div className='text-block'>
