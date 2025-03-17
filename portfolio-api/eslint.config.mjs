@@ -22,7 +22,7 @@ export default [
             // Use the TypeScript parser
             parser: tsParser,
             parserOptions: {
-                project: './tsconfig.json',
+                project: './tsconfig.json', // We can alos use ./tsconfig.dev.json and then remove the file tsconfig.json
                 tsconfigRootDir: './',
             },
         },
