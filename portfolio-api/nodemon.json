@@ -1,7 +1,7 @@
 {
     "watch": ["src", "index.ts"],
     "ext": "js,ts,json",
-    "exec": "npm run build && npm run start:dev",
+    "exec": "npm run build:dev && npm run start:dev",
     "options": {
         "legacyWatch": true,
         "watch": true,

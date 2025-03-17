@@ -93,13 +93,11 @@ app.post('/contactMail', (req, res) => {
 
     request
         .then((result) => {
-            // eslint-disable-next-line no-console
-            console.log(result);
+            // console.log(result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            // eslint-disable-next-line no-console
-            console.log(err);
+            console.error(err);
             res.sendStatus(500);
         });
 });

@@ -7,4 +7,5 @@ export default load({
     SECRET_KEY: String,
     SENDER_EMAIL: String,
     RECEIVER_EMAIL: String,
+    NODE_ENV: String,
 });

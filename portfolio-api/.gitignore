@@ -9,15 +9,15 @@ lerna-debug.log*
 
 node_modules
 dist
-dist-ssr
+distProd
 *.local
 
 .vscode
 
 .env
 .env.dev
+.env.development
 .env.production
 .env.test
 .env.tests_backend
 
-ajouts_sql.sql

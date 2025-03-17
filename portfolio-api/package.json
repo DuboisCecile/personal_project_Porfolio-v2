@@ -28,8 +28,9 @@
     },
     "scripts": {
         "dev": "nodemon",
-        "build": "npx tsc",
-        "start:dev": "node --import ./register.mjs --env-file=.env.dev dist/src/index.js",
+        "build:dev": "tsc --project tsconfig.dev.json",
+        "build:production": "tsc --project tsconfig.prod.json",
+        "start:dev": "node --import ./register.mjs --env-file=.env.development dist/dev/index.js",
         "lint": "eslint ."
     }
 }
