@@ -5,6 +5,7 @@ import Mailjet from 'node-mailjet';
 import env from './env.js';
 import { ExceptionsHandler } from './middlewares/exceptions.handler.js';
 import { UnknownRoutesHandler } from './middlewares/unknownRoutes.handler.js';
+import './utils/logger.js';
 
 const {
     PORT,
@@ -27,13 +28,18 @@ const app = express();
  */
 app.use(express.json());
 
-// /* ********************** app settings ********************** */
+/* ********************** app settings ********************** */
 app.set('x-powered-by', false); // for security
 
-const allowedOrigins = CORS_ALLOWED_ORIGINS.split(',');
-
+// const allowedOrigins = CORS_ALLOWED_ORIGINS.split(',');
+const allowedOrigins = [
+    'https://duboiscecile.fr',
+    'https://www.duboiscecile.fr',
+    'http://localhost:5173',
+];
 const corsOptions: cors.CorsOptions = {
     origin: (origin, callback) => {
+        console.log('origin', origin);
         if (origin === undefined || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
@@ -132,5 +138,7 @@ app.use(
 /* ********************** server setup ********************** */
 app.listen(PORT, () => {
     // eslint-disable-next-line no-console
-    console.log(`Server running on port ${PORT}`);
+    console.log(
+        `*************************** Server running on port ${PORT} ***************************`
+    );
 });
