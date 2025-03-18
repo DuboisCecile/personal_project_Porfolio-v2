@@ -61,9 +61,7 @@ app.get('/test', (_req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     const message = 'It woooooorks!\n';
     const version = `NodeJS ${process.versions.node}\n`;
-    // const currentPath = `__dirname : ${__dirname}`;
-    const processCwd = `process.cwd() : ${process.cwd()}`;
-    const response = [message, version, processCwd].join('\n');
+    const response = [message, version, '3'].join('\n');
     res.end(response);
 });
 

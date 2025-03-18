@@ -37,7 +37,6 @@ export default function Contact(): React.ReactElement {
             );
             toast.success(<span>Votre message a bien été envoyé&nbsp;!</span>);
         } catch (err) {
-            toast.error(JSON.stringify(err));
             toast.error(
                 <span>
                     Il y a eu un problème lors de l'envoi du message&nbsp;!
