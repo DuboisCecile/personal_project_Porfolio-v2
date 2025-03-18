@@ -3,35 +3,21 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Vérifier le type de module
-// const isESM = typeof import.meta !== 'undefined';
-// console.log(process.cwd());
-// let logFilePath;
-// if (isESM) {
-// const currentFilePath = fileURLToPath(import.meta.url);
-// const currentDir = path.dirname(currentFilePath);
-//     logFilePath = path.join(currentDir, '../logs.log');
-// } else {
-//     const currentFilePath = __filename;
-//     const currentDir = path.dirname(currentFilePath);
-//     logFilePath = path.join(currentDir, '../logs.log');
-// }
-
-// console.log('logFilePath:', logFilePath);
-// const logStream = fs.createWriteStream(logFilePath, { flags: 'a' });
-// console.log('logStream:', logStream.path);
-
-// Créer une fonction pour obtenir le dirname compatible avec ESM et CommonJS
 const getDirname = (): string => {
     if (typeof __dirname !== 'undefined') {
-        const currentFilePath = __filename; // CommonJS
-        return fileURLToPath(currentFilePath);
-        // return path.dirname(currentFilePath);
-        // return __dirname; // CommonJS
+        // CommonJS
+        // const currentFilePath = __dirname;
+        // const currentFilePath = fileURLToPath(path.join('/home/ygyjapvz/API'));
+        const currentFilePath = fileURLToPath(path.join(process.cwd()));
+        const logDir = path.join(currentFilePath, 'logs');
+        if (!fs.existsSync(logDir)) {
+            fs.mkdirSync(logDir, { recursive: true });
+        }
+        return logDir;
     } else {
         // ESM
-        const currentFilePath = path.dirname(fileURLToPath(import.meta.url));
-        const logDir = path.join(currentFilePath, '../', 'logs');
+        const currentFilePath = path.join(process.cwd(), 'dist', 'dev');
+        const logDir = path.join(currentFilePath, 'logs');
         if (!fs.existsSync(logDir)) {
             fs.mkdirSync(logDir, { recursive: true });
         }
